@@ -22,21 +22,34 @@ public class CLR implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        while (true) {
-            System.out.println("Enter commands: ");
-            String[] command = reader.readLine().split("\\|");
+        System.out.println("Enter commands: ");
+        String line;
+        // stop at end of input instead of looping forever on a null line
+        while ((line = reader.readLine()) != null) {
+            String[] command = line.split("\\|");
             switch (command[0]) {
                 case "RegisterUser":
+                    if (command.length < 5) {
+                        System.out.println("Invalid command");
+                        break;
+                    }
                     this.userService.registerUser(new UserRegisterDto(command[1], command[2], command[3], command[4]));
                     break;
 
                 case "LoginUser":
+                    if (command.length < 3) {
+                        System.out.println("Invalid command");
+                        break;
+                    }
                     this.userService.loginUser(new UserLoginDto(command[1], command[2]));
                     break;
 
                 case "Logout":
                     this.userService.logout();
                     break;
+
+                default:
+                    System.out.println("Invalid command");
             }
         }
     }

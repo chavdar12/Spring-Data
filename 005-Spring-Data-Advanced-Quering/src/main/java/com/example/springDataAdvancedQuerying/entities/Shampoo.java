@@ -1,6 +1,6 @@
 package com.example.springDataAdvancedQuerying.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -68,7 +68,6 @@ public class Shampoo extends BaseEntity {
 
     @Override
     public String toString() {
-        return "" + " " + brand + " " + price + " " + size + " " + label +
-               " " + ingredients;
+        return String.format("%s %s %.2flv.", brand, size, price);
     }
 }

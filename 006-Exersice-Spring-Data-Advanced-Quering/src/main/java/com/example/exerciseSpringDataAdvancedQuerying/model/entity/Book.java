@@ -1,6 +1,6 @@
 package com.example.exerciseSpringDataAdvancedQuerying.model.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Set;

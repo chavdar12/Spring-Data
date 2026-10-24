@@ -21,7 +21,7 @@ public class AccountServiceImpl implements AccountService {
         Account account = this.getAccount(id);
 
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Insufficient funds");
         }
 
         account.setBalance(account.getBalance().subtract(amount));

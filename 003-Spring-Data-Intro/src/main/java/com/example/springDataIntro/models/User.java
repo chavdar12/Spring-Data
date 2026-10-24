@@ -1,6 +1,6 @@
 package com.example.springDataIntro.models;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
@@ -17,6 +17,10 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Account> accounts;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;

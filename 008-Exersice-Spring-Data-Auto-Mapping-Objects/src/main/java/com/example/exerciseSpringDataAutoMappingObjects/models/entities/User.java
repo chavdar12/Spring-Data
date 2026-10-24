@@ -1,9 +1,9 @@
 package com.example.exerciseSpringDataAutoMappingObjects.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import java.util.Set;
 
 @Entity
@@ -23,7 +23,7 @@ public class User extends BaseEntity {
     public User() {
     }
 
-    @Column
+    @Column(unique = true)
     public String getEmail() {
         return email;
     }

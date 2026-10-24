@@ -3,17 +3,18 @@ package com.example.exersiceSpringDataIntro.services.Implementations;
 import com.example.exersiceSpringDataIntro.models.Author;
 import com.example.exersiceSpringDataIntro.repositories.AuthorRepository;
 import com.example.exersiceSpringDataIntro.services.AuthorService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
 
-    public static final String AUTHORS_FILE_PATH = "src/main/resources/files/authors.txt";
+    public static final String AUTHORS_FILE_PATH = "files/authors.txt";
 
     private final AuthorRepository authorRepository;
 
@@ -27,7 +28,7 @@ public class AuthorServiceImpl implements AuthorService {
             return;
         }
 
-        Files.readAllLines(Path.of(AUTHORS_FILE_PATH)).stream().filter(row -> !row.isBlank()).forEach(row -> {
+        new ClassPathResource(AUTHORS_FILE_PATH).getContentAsString(StandardCharsets.UTF_8).lines().filter(row -> !row.isBlank()).forEach(row -> {
 
             String[] fullName = row.split("\\s+");
 
@@ -39,8 +40,9 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getRandomAuthor() {
-        long randomId = ThreadLocalRandom.current().nextLong(1, authorRepository.count() + 1);
+        // pick by position: ids are not guaranteed to be 1..count
+        long randomIndex = ThreadLocalRandom.current().nextLong(authorRepository.count());
 
-        return authorRepository.findById(randomId).orElse(null);
+        return authorRepository.findAll(PageRequest.of((int) randomIndex, 1)).stream().findFirst().orElse(null);
     }
 }

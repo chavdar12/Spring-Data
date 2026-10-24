@@ -54,7 +54,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     }
 
     private void goldenBook() {
-        bookService.findAllGoldBookTitlesWithLesThan500copies().forEach(System.out::println);
+        bookService.findAllGoldBookTitlesWithLessThan5000Copies().forEach(System.out::println);
     }
 
     private void bookTitlesByAge() throws IOException {

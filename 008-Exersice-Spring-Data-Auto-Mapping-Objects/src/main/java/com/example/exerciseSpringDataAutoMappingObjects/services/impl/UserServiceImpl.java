@@ -9,7 +9,7 @@ import com.example.exerciseSpringDataAutoMappingObjects.utilities.ValidationUtil
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolation;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,7 +39,14 @@ public class UserServiceImpl implements UserService {
             return;
         }
 
+        // duplicate emails made findByEmailAndPassword fail with a non-unique result on login
+        if (userRepository.existsByEmail(userRegisterDto.getEmail())) {
+            System.out.println("Email already registered");
+            return;
+        }
+
         userRepository.save(mapper.map(userRegisterDto, User.class));
+        System.out.printf("%s was registered%n", userRegisterDto.getFullName());
     }
 
     @Override
@@ -62,6 +69,7 @@ public class UserServiceImpl implements UserService {
         }
 
         loggedInUser = user;
+        System.out.printf("Successfully logged in %s%n", user.getFullName());
     }
 
     @Override
@@ -69,6 +77,7 @@ public class UserServiceImpl implements UserService {
         if (loggedInUser == null) {
             System.out.println("Cannot logout. No user was logged in");
         } else {
+            System.out.printf("User %s successfully logged out%n", loggedInUser.getFullName());
             loggedInUser = null;
         }
     }

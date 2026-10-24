@@ -33,7 +33,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     }
 
     private void printAllAuthorNamesWithBooksWithReleaseDateBefore1990(int year) {
-        bookService.findAllAuthorsWithBooksWithReleaseDateBeforeYear(year);
+        bookService.findAllAuthorsWithBooksWithReleaseDateBeforeYear(year).forEach(System.out::println);
     }
 
     private void printAllBooksAfter2000(int year) {

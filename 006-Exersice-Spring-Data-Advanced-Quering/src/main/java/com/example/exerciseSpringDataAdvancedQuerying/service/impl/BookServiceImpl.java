@@ -5,12 +5,12 @@ import com.example.exerciseSpringDataAdvancedQuerying.repository.BookRepository;
 import com.example.exerciseSpringDataAdvancedQuerying.service.AuthorService;
 import com.example.exerciseSpringDataAdvancedQuerying.service.BookService;
 import com.example.exerciseSpringDataAdvancedQuerying.service.CategoryService;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class BookServiceImpl implements BookService {
 
-    private static final String BOOKS_FILE_PATH = "src/main/resources/files/books.txt";
+    private static final String BOOKS_FILE_PATH = "files/books.txt";
 
     private final BookRepository bookRepository;
     private final AuthorService authorService;
@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
             return;
         }
 
-        Files.readAllLines(Path.of(BOOKS_FILE_PATH)).forEach(row -> {
+        new ClassPathResource(BOOKS_FILE_PATH).getContentAsString(StandardCharsets.UTF_8).lines().filter(row -> !row.isBlank()).forEach(row -> {
             String[] bookInfo = row.split("\\s+");
 
             Book book = createBookFromInfo(bookInfo);
@@ -72,7 +72,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<String> findAllGoldBookTitlesWithLesThan500copies() {
+    public List<String> findAllGoldBookTitlesWithLessThan5000Copies() {
         return bookRepository.findAllByEditionTypeAndCopiesLessThan(EditionType.GOLD, 5000).stream().map(Book::getTitle).collect(Collectors.toList());
     }
 

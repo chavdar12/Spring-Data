@@ -1,7 +1,7 @@
 package com.example.springDataIntro;
 
-import com.example.springdataintro.services.AccountService;
-import com.example.springdataintro.services.UserService;
+import com.example.springDataIntro.services.AccountService;
+import com.example.springDataIntro.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,7 @@ public class ConsoleRunner implements CommandLineRunner {
         try {
             this.userService.register("Pesho", 25, new BigDecimal(1000));
         } catch (Exception e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         }
 
         this.userService.addAccount(new BigDecimal(6908), 1L);
@@ -31,7 +31,7 @@ public class ConsoleRunner implements CommandLineRunner {
         try {
             this.accountService.withdrawMoney(new BigDecimal(150), 3L);
         } catch (Exception e) {
-            e.getStackTrace();
+            System.out.println(e.getMessage());
         }
 
         this.accountService.transferMoney(new BigDecimal(500), 3L);

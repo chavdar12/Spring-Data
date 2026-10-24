@@ -1,0 +1,15 @@
+[versions]
+spring-boot = "4.1.2"
+
+[libraries]
+# Versions for these come from the Spring Boot BOM in the Spring modules; the JDBC modules import the same BOM.
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+mysql = { module = "com.mysql:mysql-connector-j" }
+h2 = { module = "com.h2database:h2" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+modelmapper = { module = "org.modelmapper:modelmapper", version = "3.2.8" }
+
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version = "1.1.7" }

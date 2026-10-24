@@ -17,7 +17,7 @@ public interface BookService {
 
     List<String> findAllBookTitlesWithAgeRestriction(AgeRestriction ageRestriction);
 
-    List<String> findAllGoldBookTitlesWithLesThan500copies();
+    List<String> findAllGoldBookTitlesWithLessThan5000Copies();
 
     List<String> findAllBookTitlesWithPriceLessThan5OrMoreThan40();
 

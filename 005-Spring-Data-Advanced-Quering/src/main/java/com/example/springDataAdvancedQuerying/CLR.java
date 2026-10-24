@@ -22,7 +22,7 @@ public class CLR implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Task 1");
 
-        Size size = Size.valueOf(reader.readLine());
+        Size size = Size.valueOf(reader.readLine().trim().toUpperCase());
 
         this.shampooServices.findAllBySizeOrderById(size).forEach(System.out::println);
 

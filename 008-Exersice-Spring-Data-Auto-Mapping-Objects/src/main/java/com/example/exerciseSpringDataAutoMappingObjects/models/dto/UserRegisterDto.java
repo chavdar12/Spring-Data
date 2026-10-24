@@ -1,8 +1,8 @@
 package com.example.exerciseSpringDataAutoMappingObjects.models.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class UserRegisterDto {
     private String email;

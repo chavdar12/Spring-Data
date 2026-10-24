@@ -5,12 +5,12 @@ import com.example.exersiceSpringDataIntro.repositories.BookRepository;
 import com.example.exersiceSpringDataIntro.services.AuthorService;
 import com.example.exersiceSpringDataIntro.services.BookService;
 import com.example.exersiceSpringDataIntro.services.CategoryService;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class BookServiceImpl implements BookService {
 
-    public static final String BOOKS_FILE_PATH = "src/main/resources/files/books.txt";
+    public static final String BOOKS_FILE_PATH = "files/books.txt";
 
     private final BookRepository bookRepository;
     private final AuthorService authorService;
@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
             return;
         }
 
-        Files.readAllLines(Path.of(BOOKS_FILE_PATH)).stream().filter(row -> !row.isBlank()).forEach(row -> {
+        new ClassPathResource(BOOKS_FILE_PATH).getContentAsString(StandardCharsets.UTF_8).lines().filter(row -> !row.isBlank()).forEach(row -> {
             String[] bookInfo = row.split("\\s+");
 
             Book book = createBookFromInfo(bookInfo);
@@ -51,7 +51,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findAllBooksAfterYear(int year) {
-        return bookRepository.findAllByReleaseDateAfter(LocalDate.of(year - 1, 12, 31));
+        return bookRepository.findAllByReleaseDateAfter(LocalDate.of(year, 12, 31));
     }
 
     @Override
@@ -60,6 +60,7 @@ public class BookServiceImpl implements BookService {
                 .stream()
                 .map(book -> String.format("%s %s", book.getAuthor().getFirstName(),
                                            book.getAuthor().getLastName()))
+                .distinct()
                 .collect(Collectors.toList());
     }
 
@@ -67,7 +68,7 @@ public class BookServiceImpl implements BookService {
     private Book createBookFromInfo(String[] bookInfo) {
         EditionType editionType = EditionType.values()[Integer.parseInt(bookInfo[0])];
 
-        LocalDate releaseDate = LocalDate.parse(bookInfo[1], DateTimeFormatter.ofPattern("d/M/yyy"));
+        LocalDate releaseDate = LocalDate.parse(bookInfo[1], DateTimeFormatter.ofPattern("d/M/yyyy"));
 
         Integer copies = Integer.parseInt(bookInfo[2]);
 

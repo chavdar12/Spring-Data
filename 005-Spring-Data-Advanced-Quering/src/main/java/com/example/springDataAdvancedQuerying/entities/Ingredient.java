@@ -1,6 +1,6 @@
 package com.example.springDataAdvancedQuerying.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 

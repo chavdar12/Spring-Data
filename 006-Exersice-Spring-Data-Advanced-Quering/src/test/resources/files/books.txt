@@ -1,0 +1,6 @@
+0 6/2/1985 120 12.50 0 Old Classic
+1 15/7/1989 80 3.99 1 Eighties Thriller
+2 1/1/2000 300 41.00 2 Millennium Story
+2 31/12/2000 300 41.00 2 Last Day Of The Century
+0 2/1/2001 5000 19.90 0 New Century
+
