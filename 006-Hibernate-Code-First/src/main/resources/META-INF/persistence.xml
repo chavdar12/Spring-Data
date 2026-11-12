@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+    <persistence-unit name="vehicles">
+        <class>entities.Vehicle</class>
+        <class>entities.Bike</class>
+        <class>entities.Car</class>
+        <class>entities.PlateNumber</class>
+        <class>entities.Truck</class>
+        <class>entities.Driver</class>
+        <class>entities.Plane</class>
+        <class>entities.Company</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vehicles?createDatabaseIfNotExist=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

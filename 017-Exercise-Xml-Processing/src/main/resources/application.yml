@@ -1,0 +1,14 @@
+logging:
+  level:
+    org: WARN
+spring:
+  datasource:
+    password: ${DB_PASSWORD:pass}
+    url: jdbc:mysql://localhost:3306/xml_processing?useSSL=false&createDatabaseIfNotExist=true
+    username: ${DB_USERNAME:root}
+  jpa:
+    hibernate:
+      ddl-auto: update
+# where the query results are written
+app:
+  output-dir: ${OUTPUT_DIR:output}

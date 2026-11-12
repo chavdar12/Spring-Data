@@ -9,8 +9,34 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  test:
+    name: ${{ matrix.module }}
     runs-on: ubuntu-latest
+    strategy:
+      # one failing module must not cancel the others
+      fail-fast: false
+      matrix:
+        module:
+          - 001-Database-Access-With-Jdbc
+          - 002-Exercise-Database-Access-With-Jdbc
+          - 003-Workshop-Custom-ORM
+          - 004-Introduction-To-Hibernate
+          - 005-Exercise-Introduction-To-Hibernate
+          - 006-Hibernate-Code-First
+          - 007-Exercise-Hibernate-Code-First
+          - 008-Spring-Data-Intro
+          - 009-Exercise-Spring-Data-Intro
+          - 010-Spring-Data-Advanced-Querying
+          - 011-Exercise-Spring-Data-Advanced-Querying
+          - 012-Spring-Data-Auto-Mapping-Objects
+          - 013-Exercise-Spring-Data-Auto-Mapping-Objects
+          - 014-Json-Processing
+          - 015-Exercise-Json-Processing
+          - 016-Xml-Processing
+          - 017-Exercise-Xml-Processing
+    defaults:
+      run:
+        working-directory: ${{ matrix.module }}
     steps:
       - uses: actions/checkout@v5
 
@@ -19,14 +45,17 @@ jobs:
           distribution: temurin
           java-version: 25
 
+      # each folder is its own Gradle build without a wrapper, so the Gradle version is set here
       - uses: gradle/actions/setup-gradle@v5
+        with:
+          gradle-version: 9.9.1
 
       - name: Build and test
-        run: ./gradlew build
+        run: gradle build
 
       - name: Upload test reports
         if: failure()
         uses: actions/upload-artifact@v5
         with:
-          name: test-reports
-          path: '*/build/reports/tests/test'
+          name: test-reports-${{ matrix.module }}
+          path: ${{ matrix.module }}/build/reports/tests/test

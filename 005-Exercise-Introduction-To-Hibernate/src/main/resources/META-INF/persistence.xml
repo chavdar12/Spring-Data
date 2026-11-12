@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
+    <!-- expects the soft_uni database from the course resources; username/password come from DB_USERNAME/DB_PASSWORD -->
+    <persistence-unit name="soft_uni">
+        <class>entities.Address</class>
+        <class>entities.Department</class>
+        <class>entities.Employee</class>
+        <class>entities.Project</class>
+        <class>entities.Town</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/soft_uni"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/>
+            <property name="hibernate.hbm2ddl.auto" value="none"/>
+        </properties>
+    </persistence-unit>
+</persistence>

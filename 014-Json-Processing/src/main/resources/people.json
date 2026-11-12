@@ -1,0 +1,19 @@
+[
+  {
+    "firstName": "Ivan",
+    "lastName": "Ivanov",
+    "birthDate": "1985-01-31",
+    "married": false,
+    "phoneNumbers": ["+359 887 111 222"],
+    "address": {"country": "Bulgaria", "city": "Sofia", "street": "Rakovski 1"},
+    "password": "ignored because it has no @Expose"
+  },
+  {
+    "firstName": "Maria",
+    "lastName": "Petrova",
+    "birthDate": "1992-07-04",
+    "married": true,
+    "phoneNumbers": [],
+    "address": {"country": "Bulgaria", "city": "Burgas", "street": "Aleksandrovska 10"}
+  }
+]
